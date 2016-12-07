@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{7074AE2B-9C57-4B92-A3A4-24C2F6FF6534}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DemoApp\DemoApp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="UITests\DemoAppUITests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DemoApp">
+        <MSBuild Projects="DemoApp\DemoApp.dproj"/>
+    </Target>
+    <Target Name="DemoApp:Clean">
+        <MSBuild Projects="DemoApp\DemoApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DemoApp:Make">
+        <MSBuild Projects="DemoApp\DemoApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DemoAppUITests">
+        <MSBuild Projects="UITests\DemoAppUITests.dproj"/>
+    </Target>
+    <Target Name="DemoAppUITests:Clean">
+        <MSBuild Projects="UITests\DemoAppUITests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DemoAppUITests:Make">
+        <MSBuild Projects="UITests\DemoAppUITests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DemoApp;DemoAppUITests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DemoApp:Clean;DemoAppUITests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DemoApp:Make;DemoAppUITests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
